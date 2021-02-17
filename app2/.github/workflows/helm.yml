@@ -1,0 +1,23 @@
+name: Helm
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 'Deploy'
+        uses: 'deliverybot/helm@v1'
+        with:
+          release: 'nginx'
+          namespace: 'default'
+          chart: 'helm'
+          helm: 'helm3'
+          token: '${{ github.token }}'
+        env:
+          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'

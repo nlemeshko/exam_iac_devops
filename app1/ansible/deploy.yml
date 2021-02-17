@@ -1,0 +1,15 @@
+- name: Lesson12
+  gather_facts: false
+  hosts: [all]
+  become: yes
+
+  tasks:
+
+    - name: Create lesson12
+      docker_container:
+        name: lesson12
+        image: mdsn/lesson12app1
+        pull: true
+        state: started
+        ports:
+          - "80:80"
